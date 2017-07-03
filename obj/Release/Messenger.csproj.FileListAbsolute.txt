@@ -1,0 +1,13 @@
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\Messenger.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\Messenger.pdb
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\BCrypt.Net.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\HttpServer.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\Mono.Data.Sqlite.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\MySql.Data.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\Newtonsoft.Json.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\OTAPI.dll
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\TerrariaServer.exe
+D:\Downloads\Compressed\Messenger\Messenger\bin\Release\TShockAPI.dll
+D:\Downloads\Compressed\Messenger\Messenger\obj\Release\Messenger.csprojResolveAssemblyReference.cache
+D:\Downloads\Compressed\Messenger\Messenger\obj\Release\Messenger.dll
+D:\Downloads\Compressed\Messenger\Messenger\obj\Release\Messenger.pdb
