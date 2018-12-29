@@ -73,8 +73,8 @@ namespace Messenger
             sqlcreator.EnsureTableStructure(new SqlTable("Messages",
                 new SqlColumn("ID", MySqlDbType.Int32) { Unique = true, Primary = true, AutoIncrement = true },
                 new SqlColumn("Time", MySqlDbType.String, 200),
-                new SqlColumn("From", MySqlDbType.String, 200),
-                new SqlColumn("To", MySqlDbType.String, 200),
+                new SqlColumn("Sender", MySqlDbType.String, 200),
+                new SqlColumn("Receiver", MySqlDbType.String, 200),
                 new SqlColumn("WorldID", MySqlDbType.Int32),
                 new SqlColumn("Message", MySqlDbType.String),
                 new SqlColumn("Status", MySqlDbType.String, 200)));
@@ -108,7 +108,7 @@ namespace Messenger
 
                 while (reader.Read())
                 {
-                    if ((reader.Get<string>("To") == ply.Name) && (reader.Get<string>("Status") == "Unread"))
+                    if ((reader.Get<string>("Receiver") == ply.Name) && (reader.Get<string>("Status") == "Unread"))
                     {
                         count++;
                         
@@ -152,9 +152,9 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<string>("To") == args.Player.Name) && (reader.Get<string>("Status") == "Unread"))
+                        if ((reader.Get<string>("Receiver") == args.Player.Name) && (reader.Get<string>("Status") == "Unread"))
                         {
-                            total = "[ID "+ reader.Get<int>("ID")+"] ["+ reader.Get<string>("Time").Remove(19) + "] " + "* " + reader.Get<string>("From") +": "+ reader.Get<string>("Message");
+                            total = "[ID "+ reader.Get<int>("ID")+"] ["+ reader.Get<string>("Time").Remove(19) + "] " + "* " + reader.Get<string>("Sender") +": "+ reader.Get<string>("Message");
                             count++;
                             lines.Add(total);
                         }
@@ -184,10 +184,10 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<string>("To") == args.Player.Name) && (reader.Get<string>("Status") == "Read"))
+                        if ((reader.Get<string>("Receiver") == args.Player.Name) && (reader.Get<string>("Status") == "Read"))
                         {
                             count++;
-                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] " + "* " + reader.Get<string>("From") +  ": " + reader.Get<string>("Message");
+                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] " + "* " + reader.Get<string>("Sender") +  ": " + reader.Get<string>("Message");
                             lines.Add(total);
                         }
                     }
@@ -216,10 +216,10 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<string>("From") == args.Player.Name))
+                        if ((reader.Get<string>("Sender") == args.Player.Name))
                         {
                             count++;
-                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] "+"* To: " + reader.Get<string>("To") + ": " + reader.Get<string>("Message");
+                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] "+"* To: " + reader.Get<string>("Receiver") + ": " + reader.Get<string>("Message");
                             lines.Add(total);
                         }
                     }
@@ -248,10 +248,10 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<string>("To") == args.Player.Name) && (reader.Get<string>("Status") != "Deleted"))
+                        if ((reader.Get<string>("Receiver") == args.Player.Name) && (reader.Get<string>("Status") != "Deleted"))
                         {
                             count++;
-                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] "+"* " + reader.Get<string>("From") +": " + reader.Get<string>("Message");
+                            total = "[ID " + reader.Get<int>("ID") + "] [" + reader.Get<string>("Time").Remove(19) + "] "+"* " + reader.Get<string>("Sender") +": " + reader.Get<string>("Message");
                             lines.Add(total);
                         }
                     }
@@ -276,11 +276,11 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<int>("ID") == id) && (reader.Get<String>("To") == args.Player.Name) )
+                        if ((reader.Get<int>("ID") == id) && (reader.Get<String>("Receiver") == args.Player.Name) )
                         {
                             found = true;
                             args.Player.SendMessage("[" + reader.Get<string>("Time").Remove(19) + "] ", Color.LightBlue);
-                            args.Player.SendMessage("* "+ reader.Get<string>("From")+": " + reader.Get<string>("Message"), Color.LightBlue);
+                            args.Player.SendMessage("* "+ reader.Get<string>("Sender") +": " + reader.Get<string>("Message"), Color.LightBlue);
                         }
                     }
                 }
@@ -312,7 +312,7 @@ namespace Messenger
 
                     while (reader.Read())
                     {
-                        if ((reader.Get<int>("ID") == id) && (reader.Get<String>("To") == args.Player.Name) && (reader.Get<String>("Status") != "Deleted"))
+                        if ((reader.Get<int>("ID") == id) && (reader.Get<String>("Receiver") == args.Player.Name) && (reader.Get<String>("Status") != "Deleted"))
                         {
                             found = true;
                         }
@@ -354,7 +354,7 @@ namespace Messenger
                     message = message + " " + args.Parameters[i];
                 }
             }
-            var add = MessengerDB.Query("INSERT INTO Messages (Time, 'From', 'To', Message, WorldID, Status) VALUES (@0, @1, @2, @3, @4, @5);", DateTime.Now, args.Player.Name, plyname.Name, message, Main.worldID, "Unread");
+            var add = MessengerDB.Query("INSERT INTO Messages (Time, Sender, Receiver, Message, WorldID, Status) VALUES (@0, @1, @2, @3, @4, @5);", DateTime.Now, args.Player.Name, plyname.Name, message, Main.worldID, "Unread");
             if ((TShock.Utils.FindPlayer(plyname.Name).Count == 0))
             {
                 args.Player.SendMessage("Player " + plyname.Name + " is not online. They will be notified about your message on their next login.", Color.LightBlue);              
@@ -371,7 +371,7 @@ namespace Messenger
                     {
                         while (reader.Read())
                         {
-                            if ((reader.Get<string>("To") == plyname.Name) && (reader.Get<string>("Status") == "Unread") && (reader.Get<string>("From") == args.Player.Name) && (reader.Get<int>("WorldID") == Main.worldID) && (reader.Get<string>("Message") == message)) 
+                            if ((reader.Get<string>("Receiver") == plyname.Name) && (reader.Get<string>("Status") == "Unread") && (reader.Get<string>("Sender") == args.Player.Name) && (reader.Get<int>("WorldID") == Main.worldID) && (reader.Get<string>("Message") == message)) 
                             {
                                 notiid = reader.Get<int>("ID");
                             }
