@@ -76,7 +76,7 @@ namespace Messenger
                 new SqlColumn("Sender", MySqlDbType.String, 200),
                 new SqlColumn("Receiver", MySqlDbType.String, 200),
                 new SqlColumn("WorldID", MySqlDbType.Int32),
-                new SqlColumn("Message", MySqlDbType.String),
+                new SqlColumn("Message", MySqlDbType.String, 2000),
                 new SqlColumn("Status", MySqlDbType.String, 200)));
 
 
