@@ -8,8 +8,8 @@ E:\OneDrive\Documents\GitHub\Messenger\bin\Debug\Newtonsoft.Json.dll
 E:\OneDrive\Documents\GitHub\Messenger\bin\Debug\OTAPI.dll
 E:\OneDrive\Documents\GitHub\Messenger\bin\Debug\TerrariaServer.exe
 E:\OneDrive\Documents\GitHub\Messenger\bin\Debug\TShockAPI.dll
-E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.csprojResolveAssemblyReference.cache
 E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.csproj.CoreCompileInputs.cache
 E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.csproj.CopyComplete
 E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.dll
 E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.pdb
+E:\OneDrive\Documents\GitHub\Messenger\obj\Debug\Messenger.csprojAssemblyReference.cache

@@ -334,12 +334,12 @@ namespace Messenger
 
             #region addmsg
             
-            if ((TShock.Users.GetUserByName(args.Parameters[0]) == null))
+            if ((TShock.Users.GetUsersByName(args.Parameters[0]).Count == 0))
             {
                 args.Player.SendMessage("No player with the name of \"" + args.Parameters[0] + "\" is found.", Color.LightBlue);
                 return;
             }
-            User plyname = TShock.Users.GetUserByName(args.Parameters[0]);
+            User plyname = TShock.Users.GetUsersByName(args.Parameters[0])[0];
             string message = args.Parameters[1];
             if (args.Parameters.Count == 1)
             {
